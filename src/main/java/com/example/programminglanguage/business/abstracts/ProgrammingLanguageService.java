@@ -1,10 +1,10 @@
-package com.example.programminglanguage.dataAccess.abstracts;
+package com.example.programminglanguage.business.abstracts;
 
 import com.example.programminglanguage.entities.concretes.ProgrammingLanguage;
 
 import java.util.List;
 
-public interface ProgrammingLanguageRepository {
+public interface ProgrammingLanguageService {
     List<ProgrammingLanguage> getAll();
 
     void add(ProgrammingLanguage programmingLanguage);
@@ -14,4 +14,5 @@ public interface ProgrammingLanguageRepository {
     void update(int id, ProgrammingLanguage programmingLanguage);
 
     ProgrammingLanguage getLanguageById(int id);
+
 }
