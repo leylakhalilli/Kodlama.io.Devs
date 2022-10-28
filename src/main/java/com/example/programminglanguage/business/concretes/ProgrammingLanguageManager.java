@@ -10,36 +10,50 @@ import java.util.List;
 
 @Service
 public class ProgrammingLanguageManager implements ProgrammingLanguageService {
-    private ProgrammingLanguageRepository languageRepository;
+
+    private ProgrammingLanguageRepository programmingLanguageRepository;
 
     @Autowired
-    public ProgrammingLanguageManager(ProgrammingLanguageRepository languageRepository) {
-        this.languageRepository = languageRepository;
+    public ProgrammingLanguageManager(ProgrammingLanguageRepository programmingLanguageRepository) {
+        this.programmingLanguageRepository = programmingLanguageRepository;
     }
 
     @Override
     public List<ProgrammingLanguage> getAll() {
-        return languageRepository.getAll();
+        return programmingLanguageRepository.getAll();
     }
 
     @Override
-    public void add(ProgrammingLanguage programmingLanguage) {
-        languageRepository.add(programmingLanguage);
+    public ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) throws Exception {
+        if (isNameExist(programmingLanguage)) throw new Exception("Program name cannot be repeated");
+
+        return programmingLanguageRepository.add(programmingLanguage);
     }
 
     @Override
     public void delete(int id) {
-        languageRepository.delete(id);
+        programmingLanguageRepository.delete(id);
 
     }
 
     @Override
-    public void update(int id, ProgrammingLanguage programmingLanguage) {
-        languageRepository.update(id, programmingLanguage);
+    public void update(int id, ProgrammingLanguage programmingLanguage) throws Exception {
+        if (isNameExist(programmingLanguage)) throw new Exception("Program name cannot be repeated");
+        programmingLanguageRepository.update(id, programmingLanguage);
+
     }
 
     @Override
     public ProgrammingLanguage getLanguageById(int id) {
-        return languageRepository.getLanguageById(id);
+        return programmingLanguageRepository.getLanguageById(id);
+    }
+
+    public boolean isNameExist(ProgrammingLanguage language) {
+        for (ProgrammingLanguage language1 : getAll()) {
+            if (language.getName().equals(language1.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

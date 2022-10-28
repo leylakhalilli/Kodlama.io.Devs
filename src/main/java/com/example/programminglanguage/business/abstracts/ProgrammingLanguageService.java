@@ -7,11 +7,11 @@ import java.util.List;
 public interface ProgrammingLanguageService {
     List<ProgrammingLanguage> getAll();
 
-    void add(ProgrammingLanguage programmingLanguage);
+    ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) throws Exception;
 
     void delete(int id);
 
-    void update(int id, ProgrammingLanguage programmingLanguage);
+    void update(int id, ProgrammingLanguage programmingLanguage) throws Exception;
 
     ProgrammingLanguage getLanguageById(int id);
 
