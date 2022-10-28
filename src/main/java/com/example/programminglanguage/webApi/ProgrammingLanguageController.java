@@ -26,25 +26,27 @@ public class ProgrammingLanguageController {
         return languageService.getAll();
     }
 
-    @GetMapping("id/{id}")
-    public ProgrammingLanguage getLanguageById(@PathVariable int id) {
-        return languageService.getLanguageById(id);
-
-    }
 
     @PostMapping("/add")
-    public void add(@RequestBody ProgrammingLanguage language) {
-        languageService.add(language);
+    public ProgrammingLanguage add(@RequestBody ProgrammingLanguage language) throws Exception {
+        return languageService.add(language);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) {
         languageService.delete(id);
+        return "delete";
     }
 
     @PutMapping("/update/{id}")
-    public void update(@PathVariable int id, @RequestBody ProgrammingLanguage language) {
+    public String update(@PathVariable int id, @RequestBody ProgrammingLanguage language) throws Exception {
         languageService.update(id, language);
+        return "update";
+    }
+
+    @GetMapping("/{id}")
+    public ProgrammingLanguage getLanguageById(@PathVariable int id) {
+        return languageService.getLanguageById(id);
     }
 
 }
