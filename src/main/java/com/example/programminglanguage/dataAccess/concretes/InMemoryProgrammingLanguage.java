@@ -25,56 +25,30 @@ public class InMemoryProgrammingLanguage implements ProgrammingLanguageRepositor
         return programmingLanguageList;
     }
 
-    @Override
-    public void add(ProgrammingLanguage programmingLanguage) {
-        if (!isExist(programmingLanguage)) {
-            if (!programmingLanguage.getName().equals("")) {
-                programmingLanguageList.add(programmingLanguage);
 
-            }
-        }
+    @Override
+    public ProgrammingLanguage add(ProgrammingLanguage programmingLanguage) {
+        programmingLanguageList.add(programmingLanguage);
+        return getLanguageById(programmingLanguage.getId());
     }
 
     @Override
     public void delete(int id) {
-        for (ProgrammingLanguage language : programmingLanguageList) {
-            if (language.getId() == id) {
-                programmingLanguageList.remove(language);
-            }
-        }
+        programmingLanguageList.remove(id);
 
     }
 
     @Override
     public void update(int id, ProgrammingLanguage programmingLanguage) {
+        ProgrammingLanguage language = getLanguageById(id);
+        language.setName(programmingLanguage.getName());
 
-        for (ProgrammingLanguage language : programmingLanguageList) {
-            if (language.getId() == id) {
-                language.setId(language.getId());
-                language.setName(language.getName());
-
-            }
-        }
     }
 
 
     @Override
     public ProgrammingLanguage getLanguageById(int id) {
-        for (ProgrammingLanguage language : programmingLanguageList) {
-            if (language.getId() == id) {
-                return language;
-            }
-        }
-        return null;
+        return programmingLanguageList.stream().filter(language -> language.getId() == id).findFirst().get();
     }
 
-    public boolean isExist(ProgrammingLanguage programmingLanguage) {
-        boolean result = false;
-        for (ProgrammingLanguage language : programmingLanguageList) {
-            if (language.getName().equals(language.getName())) {
-                result = true;
-            }
-        }
-        return result;
-    }
 }
