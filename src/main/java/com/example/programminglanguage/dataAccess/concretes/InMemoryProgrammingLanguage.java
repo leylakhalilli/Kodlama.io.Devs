@@ -34,7 +34,8 @@ public class InMemoryProgrammingLanguage implements ProgrammingLanguageRepositor
 
     @Override
     public void delete(int id) {
-        programmingLanguageList.remove(id);
+        int index = programmingLanguageList.indexOf(getLanguageById(id));
+        programmingLanguageList.remove(index);
 
     }
 
